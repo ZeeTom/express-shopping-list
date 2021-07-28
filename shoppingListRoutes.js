@@ -1,5 +1,4 @@
 const express = require("express");
-const { route } = require("./app");
 const { NotFoundError, BadRequestError } = require("./expressError")
 const db = require("./fakeDb");
 const router = new express.Router();
