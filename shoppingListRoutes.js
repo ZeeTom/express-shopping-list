@@ -11,10 +11,10 @@ router.get("/", function (req, res, next) {
 /* POST /items: accepts JSON body, add item, and return it */
 router.post("/", function (req, res, next) {
   if (!req.body.name || !req.body.price) {
-    throw new BadRequestError();
+    throw new BadRequestError("Invalid input");
   } else if (db.items.find(item => req.body.name === item.name)) {
     // to prevent adding duplicate items to list
-    throw new BadRequestError("Error: item already exists.")
+    throw new BadRequestError("Item already exists.")
   }
   db.items.push({ name: req.body.name, price: req.body.price });
   return res.json({ added: { name: req.body.name, price: req.body.price } });
