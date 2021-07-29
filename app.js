@@ -1,11 +1,12 @@
+"use strict"
 const express = require("express");
 const { NotFoundError } = require("./expressError");
-const shoppingListRoutes = require("./shoppingListRoutes");
+const itemsRoutes = require("./items");
 
 const app = express();
 
 app.use(express.json());
-app.use("/items", shoppingListRoutes);
+app.use("/items", itemsRoutes);
 
 /** 404 handler: matches unmatched routes; raises NotFoundError. */
 app.use(function (req, res, next) {

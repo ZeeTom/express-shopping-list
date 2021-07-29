@@ -1,3 +1,4 @@
+"use strict"
 const express = require("express");
 const { NotFoundError, BadRequestError } = require("./expressError")
 const db = require("./fakeDb");
@@ -16,8 +17,9 @@ router.post("/", function (req, res, next) {
     // to prevent adding duplicate items to list
     throw new BadRequestError("Item already exists.")
   }
-  db.items.push({ name: req.body.name, price: req.body.price });
-  return res.json({ added: { name: req.body.name, price: req.body.price } });
+  const {name, price} = req.body;
+  db.items.push({ name, price });
+  return res.json({ added: { name, price } });
 });
 
 /* GET /items/:name: return single item */
@@ -35,8 +37,9 @@ router.patch("/:name", function (req, res, next) {
   if (itemIdx === -1) {
     throw new NotFoundError(`${req.params.name} not found`);
   }
-  db.items[itemIdx] = { name: req.body.name, price: req.body.price }
-  return res.json({updated: { name: req.body.name, price: req.body.price }});
+  const {name,price} = req.body
+  db.items[itemIdx] = { name, price }
+  return res.json({updated: { name, price}});
 })
 
 /* DELETE /items/:name: delete item */

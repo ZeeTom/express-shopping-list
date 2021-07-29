@@ -1,4 +1,4 @@
-const { ExpectationFailed } = require("http-errors");
+"use strict"
 const request = require("supertest");
 
 const app = require("./app");
